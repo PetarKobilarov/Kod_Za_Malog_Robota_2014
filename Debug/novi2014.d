@@ -14,7 +14,7 @@ novi2014.d novi2014.o novi2014.o: .././novi2014.c \
   c:/winavr-20100110/lib/gcc/../../avr/include/util/delay_basic.h \
   .././odometry.h .././usart.h .././timers.h \
   c:/winavr-20100110/lib/gcc/../../avr/include/avr/interrupt.h \
-  .././system.h .././detekcijaProtivnika.h
+  .././system.h .././detekcijaProtivnika.h .././crvena-ZutaStrana.h
 
 c:/winavr-20100110/lib/gcc/../../avr/include/avr/io.h:
 
@@ -55,3 +55,5 @@ c:/winavr-20100110/lib/gcc/../../avr/include/avr/interrupt.h:
 .././system.h:
 
 .././detekcijaProtivnika.h:
+
+.././crvena-ZutaStrana.h:

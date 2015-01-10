@@ -15,7 +15,7 @@
 //************************************************************************************************************************************************************************************
 
 void setSpeed( unsigned char brzina );
-void setPosition ( unsigned int X, unsigned int Y, signed int smer );
+unsigned int setPosition ( unsigned int X, unsigned int Y, signed int smer );
 unsigned int rotate( signed int ugao, unsigned char brzina );
 unsigned int setUgao( signed int apsolutniUgao, unsigned char brzina );
 unsigned int moveOnDirection( signed int razdaljina, unsigned char brzina, int tipKretanja );

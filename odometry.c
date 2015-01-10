@@ -8,6 +8,7 @@
 #include <avr/io.h>
 #include "system.h"
 #include "detekcijaProtivnika.h"
+#include "crvena-zutaStrana.h"
 
 void stop(void)
 {
@@ -16,7 +17,7 @@ void stop(void)
 	message[0] = 'S';
 	
 	while(CAN_Write(message,DRIVER_TX_IDENTIFICATOR));	
-	_delay_ms(5);
+	_delay_ms(50);
 }
 
 void setSpeed(unsigned char Brzina)
@@ -27,7 +28,7 @@ void setSpeed(unsigned char Brzina)
 	message[1] = Brzina;
 	
 	while(CAN_Write(message,DRIVER_TX_IDENTIFICATOR));	
-	_delay_ms(2);
+	_delay_ms(50);
 }
 
 unsigned int moveOnDirection( signed int razdaljina, unsigned char brzina, int tipKretanja )
@@ -52,7 +53,7 @@ unsigned int moveOnDirection( signed int razdaljina, unsigned char brzina, int t
 	
 	while(1)
 	{
-		_delay_ms(150);
+		_delay_ms(120);
 		if( tipKretanja == STANDARD )
 		{
 			if ( dobiDetekciju( smer ) )
@@ -69,10 +70,11 @@ unsigned int moveOnDirection( signed int razdaljina, unsigned char brzina, int t
 		
 		message[0] = 'P';
 		while(CAN_Write(message,DRIVER_TX_IDENTIFICATOR));
-		_delay_ms(60);
+		_delay_ms(10);
 		
-		if(CAN_CheckRX(DRIVER_RX_IDENTIFICATOR))
+		while(CAN_CheckRX(DRIVER_RX_IDENTIFICATOR) == 0)
 		{
+			_delay_ms(5);
 			CAN_Read(message, DRIVER_RX_IDENTIFICATOR,0);
 			
 			if (message[0] == 'I')
@@ -117,13 +119,13 @@ char gotoXY( unsigned int X, unsigned int Y, unsigned char brzina, signed char s
 	
 	while(1)
 	{	
-		_delay_ms(150);
+		_delay_ms(120);
 		if( tipKretanja == STANDARD )
 		{
 			if ( dobiDetekciju( smer ) )
 			{
 				stop();
-				_delay_ms(1000);
+				_delay_ms(10);
 				return DETEKTOVAN;
 			}
 		}
@@ -136,8 +138,9 @@ char gotoXY( unsigned int X, unsigned int Y, unsigned char brzina, signed char s
 		while(CAN_Write(message,DRIVER_TX_IDENTIFICATOR));
 		_delay_ms(60);
 		
-		if(CAN_CheckRX(DRIVER_RX_IDENTIFICATOR))
+		while(CAN_CheckRX(DRIVER_RX_IDENTIFICATOR) == 0 )
 		{
+			_delay_ms(5);
 			CAN_Read(message, DRIVER_RX_IDENTIFICATOR,0);
 			
 			if (message[0] == 'I')
@@ -177,8 +180,9 @@ unsigned int rotate( signed int ugao, unsigned char brzina )
 			while( CAN_Write(message,DRIVER_TX_IDENTIFICATOR) );
 			_delay_ms(50);
 			
-			if( CAN_CheckRX(DRIVER_RX_IDENTIFICATOR) )
+			while( CAN_CheckRX(DRIVER_RX_IDENTIFICATOR) == 0 )
 			{
+				_delay_ms(10);
 				CAN_Read( message, DRIVER_RX_IDENTIFICATOR,0 );
 				
 				if ( message[0] == 'I' )
@@ -216,8 +220,9 @@ unsigned int setUgao( signed int apsolutniUgao, unsigned char brzina )
 		while(CAN_Write(message,DRIVER_TX_IDENTIFICATOR));
 		_delay_ms(50);
 		
-		if(CAN_CheckRX(DRIVER_RX_IDENTIFICATOR))
+		while(CAN_CheckRX(DRIVER_RX_IDENTIFICATOR) == 0 )
 		{
+			_delay_ms(5);
 			CAN_Read(message, DRIVER_RX_IDENTIFICATOR,0);
 			
 			if (message[0] == 'I')
@@ -237,7 +242,7 @@ unsigned int setUgao( signed int apsolutniUgao, unsigned char brzina )
 		}	
 }
 
-void setPosition ( unsigned int X, unsigned int Y, signed int smer )
+unsigned int setPosition ( unsigned int X, unsigned int Y, signed int smer )
 {
 	unsigned char message[8];
 		
@@ -253,7 +258,7 @@ void setPosition ( unsigned int X, unsigned int Y, signed int smer )
 	while(CAN_Write(message,DRIVER_TX_IDENTIFICATOR));
 	_delay_ms(50);
 		
-
+	return 1;
 }
 
 char getY(void)

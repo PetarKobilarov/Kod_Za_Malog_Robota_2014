@@ -14,20 +14,26 @@
 															Kordinate na koje ce robot ici ako je na crvenoj strani i smer kretanja.
 *************************************************************************************************************************************************************************************/
 
-#define brojPozicijaCrvenaStrana 1
+#define brojPozicijaCrvenaStrana 3
 
 const unsigned int pozicijaCrvenoX[brojPozicijaCrvenaStrana] PROGMEM= // X osa
 {
-	2000
+	2000,
+	2000,
+	2500
 };
 
 const unsigned int pozicijaCrvenoY[brojPozicijaCrvenaStrana]PROGMEM= //Y osa
 {
-	1000
+	1000,
+	1500,
+	1500
 };
 
 const signed char orijentacijaRobotaCrveno[brojPozicijaCrvenaStrana]PROGMEM=
 {
+	1,
+	1,
 	1
 };
 

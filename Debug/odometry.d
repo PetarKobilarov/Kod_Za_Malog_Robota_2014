@@ -13,7 +13,7 @@ odometry.d odometry.o odometry.o: .././odometry.c .././can.h \
   c:/winavr-20100110/lib/gcc/../../avr/include/avr/version.h \
   c:/winavr-20100110/lib/gcc/../../avr/include/avr/fuse.h \
   c:/winavr-20100110/lib/gcc/../../avr/include/avr/lock.h .././system.h \
-  .././detekcijaProtivnika.h
+  .././detekcijaProtivnika.h .././crvena-zutaStrana.h
 
 .././can.h:
 
@@ -48,3 +48,5 @@ c:/winavr-20100110/lib/gcc/../../avr/include/avr/lock.h:
 .././system.h:
 
 .././detekcijaProtivnika.h:
+
+.././crvena-zutaStrana.h:

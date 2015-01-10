@@ -53,22 +53,22 @@ void debaunsingZaTaster( void )
 
 int senzorikaNapredProvera( void )
 {
-	for ( j = 0; j < 4; j++ )
+	for ( j = 2; j < 4; j++ )
 	{
 		if ( SENZOR_matrica[j][0] | SENZOR_matrica[j][1] | SENZOR_matrica[j][2] )
-			return 0;
-	}
 			return 1;
+	}
+			return 0;
 }
 
 int senzorikaNazadProvera( void )
 {
-	for ( j = 4; j < 7; j++ )
+	for ( j = 5; j < 7; j++ )
 	{
 		if ( SENZOR_matrica[j][0] | SENZOR_matrica[j][1] | SENZOR_matrica[j][2] )
-			return 0;
-	}
 			return 1;
+	}
+			return 0;
 }
 
 int dobiDetekciju( int smer )
